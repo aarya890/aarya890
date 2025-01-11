@@ -1,0 +1,22 @@
+
+# Create the database and tables
+conn = sqlite3.connect('telegram_system.db')
+cursor = conn.cursor()
+
+# Create users table
+cursor.execute('''CREATE TABLE IF NOT EXISTS users (
+    username TEXT UNIQUE,
+    password TEXT,
+    registration_code TEXT,
+    access_count INTEGER DEFAULT 0
+)''')
+
+# Create codes table
+cursor.execute('''CREATE TABLE IF NOT EXISTS codes (
+    code TEXT UNIQUE,
+    link TEXT
+)''')
+
+conn.commit()
+conn.close()
+print("Database and tables created successfully!")
